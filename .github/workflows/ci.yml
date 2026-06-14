@@ -22,14 +22,14 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Security Scanner
+      - name: Install Bandit
         run: |
           pip install bandit
 
@@ -44,3 +44,13 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t secure-access-management-portal .
+
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: secure-access-management-portal:latest
+          format: table
+          exit-code: 0
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
