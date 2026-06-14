@@ -46,7 +46,7 @@ jobs:
           docker build -t secure-access-management-portal .
 
       - name: Run Trivy Vulnerability Scanner
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: secure-access-management-portal:latest
           format: table
