@@ -20,7 +20,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
+from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -32,5 +32,10 @@ urlpatterns = [
     path(
         'api/token/refresh/',
         TokenRefreshView.as_view()
+    ),
+
+    path(
+        'api/',
+        include('access_requests.urls')
     ),
 ]

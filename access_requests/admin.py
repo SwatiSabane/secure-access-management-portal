@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import AccessRequest
 
-# Register your models here.
+from .models import AccessRequest, AuditLog
+
+admin.site.register(AccessRequest)
+admin.site.register(AuditLog)
